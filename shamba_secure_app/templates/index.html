@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Shamba Secure</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+
+<style>
+
+.custom-video {
+  width: 100%; /* Makes the video take up the full width of the carousel */
+  height: auto; /* Adjusts height based on width to maintain aspect ratio */
+  max-height: 500px; /* Sets a maximum height for the video */
+  object-fit: cover; /* Ensures the video covers the entire area */
+}
+
+
+.property-card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.property-image {
+    position: relative;
+}
+
+.property-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.property-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #00c851;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.property-details {
+    padding: 20px;
+}
+
+.property-type {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.network-tag, .condo-tag {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #495057;
+}
+
+.property-price {
+    font-size: 24px;
+    color: #28a745;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.property-address {
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+.property-info {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.property-info span {
+    display: flex;
+    align-items: center;
+}
+
+.property-info i {
+    margin-right: 20px;
+}
+
+.property-location {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.property-location i {
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+
+.request-container {
+    max-width: 600px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+
+/* Popup container */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* High value to ensure it appears above other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+}
+
+/* Popup content */
+.popup-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border-radius: 10px; /* Rounded corners */
+    margin: 5% auto; /* Centered */
+    padding: 20px;
+    width: 90%; /* Full width on small screens */
+    max-width: 800px; /* Maximum width */
+    position: relative;
+}
+
+/* Close button (optional) */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Responsive layout for the form */
+.login-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.brand-wrapper {
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.login-wrapper {
+    text-align: center;
+}
+
+.login-title {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.login-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password-link {
+    display: block;
+    margin-top: 10px;
+}
+
+.login-wrapper-footer-text {
+    margin-top: 20px;
+}
+
+/* Hide image on small screens */
+.d-none {
+    display: none;
+}
+
+/* Show image on larger screens */
+@media (min-width: 576px) {
+    .d-sm-block {
+        display: block;
+    }
+}
+
+/* Adjust image styling */
+.login-img {
+    width: 100%;
+    height: auto;
+}
+
+
+</style>
+
+
+<body>
+<!-- Top Bar Start -->
+<div class="top-bar">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-1 col-md-12">
+                <div class="logo">
+                    <a href="#">
+                        <h1>Shamba<span>Secure</span></h1>
+                        <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="top-bar-item">
+                            <div class="top-bar-icon">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="top-bar-text">
+                                <h3>Opening Hour</h3>
+                                <p>Mon - Fri, 8:00 - 9:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="top-bar-item">
+                            <div class="top-bar-icon">
+                                <i class="fa fa-phone-alt"></i>
+                            </div>
+                            <div class="top-bar-text">
+                                <h3>Call Us</h3>
+                                <p>+012 345 6789</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="top-bar-item">
+                            <div class="top-bar-icon">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <div class="top-bar-text">
+                                <h3>Email Us</h3>
+                                <p>info@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top Bar End -->
+
+<!-- Nav Bar Start -->
+<div class="nav-bar">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <a class="navbar-brand" href="#">MENU</a>
+            <button class="navbar-toggler" data-target="#navbarCollapse" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link active" href="/">Home</a>
+                    <a id="loginBtn" class="btn btn-custom nav-item nav-link">Land owners</a>
+                    <a class="btn btn-custom nav-item nav-link" href="">Govt officials</a>
+                    <a class="btn btn-custom nav-item nav-link" href="/real-estate-dash">Real Estate Agents</a>
+                </div>
+                <div class="ml-auto">
+                    <a class="btn btn-custom" href="#location">Get Appointment</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Nav Bar End -->
+
+
+<!-- The Popup Form -->
+<div id="loginPopup" class="popup">
+    <div class="popup-content">
+        <div class="row">
+        <div class="col-sm-6 login-section-wrapper">
+          <div class="brand-wrapper">
+            <img src="{% static 'img/land1.jpg' %}" alt="logo" class="logo">
+          </div>
+          <div class="login-wrapper my-auto">
+            <h1 class="login-title">Log in</h1>
+            <form action="#!">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="email@example.com">
+              </div>
+              <div class="form-group mb-4">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
+              </div>
+              <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login" onclick="window.location.href='/user-dashboard';">
+<!--                <button id="nfid-login">Log in with NFID</button>-->
+            </form>
+            <a href="#!" class="forgot-password-link">Forgot password?</a>
+            <p class="login-wrapper-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
+          </div>
+        </div>
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="{% static 'img/owner1.jfif' %}" alt="login image" class="login-img">
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- End Pop up -->
+
+
+<!-- Carousel Start -->
+<div class="carousel">
+    <div class="container-fluid">
+        <div class="owl-carousel">
+            <div class="carousel-item">
+                <div class="carousel-img">
+                    <div class="video-wrap">
+                        <img alt="Image" src="{% static 'img/prop7.jpg' %}">
+                    </div>
+                </div>
+                <div class="carousel-text">
+                    <h3>Your Land, Your Rights, Our Blockchain</h3>
+                    <h1>Keep your Land Secure</h1>
+                    <p>
+                        Experience secure, transparent, and efficient land ownership solutions tailored for Africa.
+                        Empower your land rights with the technology of tomorrow. </p>
+                    <a class="btn btn-custom" href="">Explore More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+<!-- About Start -->
+<div class="about">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-img">
+                    <img alt="Image" src="{% static 'img/prop1.jpg' %}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="section-header text-left">
+                    <p>About Us</p>
+                    <h2>Empowering Land Ownership with Blockchain Innovation</h2>
+                </div>
+                <div class="about-content">
+                    <p>
+                        We are a pioneering team dedicated to transforming land management in Kenya through blockchain
+                        technology. Our mission is to provide secure, transparent, and efficient solutions for land
+                        ownership, ensuring that every plot is accurately recorded and protected.
+                    </p>
+                    <ul>
+                        <li><i class="far fa-check-circle"></i>Secure</li>
+                        <li><i class="far fa-check-circle"></i>Transparent</li>
+                        <li><i class="far fa-check-circle"></i>Digital</li>
+                        <li><i class="far fa-check-circle"></i>Trust worthy</li>
+                    </ul>
+                    <a class="btn btn-custom" href="">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Service Start -->
+<div class="service">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>What We Do?</p>
+            <h2>Services</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-file-signature"></i>
+                    <h3>Land Registration</h3>
+                    <p>Secure and immutable records for rightful land ownership</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-map"></i>
+                    <h3>Physical Planning</h3>
+                    <p>Optimizing land use through data-driven planning and blockchain transparency.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-draw-polygon"></i>
+                    <h3>Survey & Mapping</h3>
+                    <p>"Accurate geospatial mapping powered by blockchain integrity and machine learning."</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-building"></i>
+                    <h3>Land Allocation</h3>
+                    <p>"Streamlined and automated processes for efficient land governance."</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-home"></i>
+                    <h3>Land Administration</h3>
+                    <p> "Streamlined and automated processes for efficient land governance."</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-exchange-alt"></i>
+                    <h3>Property Management</h3>
+                    <p>"Enhancing property oversight with smart contracts and predictive analytics."</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-credit-card"></i>
+                    <h3>Land Transactions</h3>
+                    <p>"Frictionless, secure, and transparent land exchanges on the blockchain."</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i aria-hidden="true" class="fa fa-chart-line"></i>
+                    <h3>Future Trends</h3>
+                    <p>"Shaping the future of land management with AI-driven insights and blockchain technology."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+
+<!-- Facts Start -->
+<div class="facts" data-image-src="{% static 'img/facts.jpg' %}" data-parallax="scroll">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="fa fa-map-marker-alt"></i>
+                    <div class="facts-text">
+                        <h3 data-toggle="counter-up">53</h3>
+                        <p>Countries Mapped</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="fa fa-user"></i>
+                    <div class="facts-text">
+                        <h3 data-toggle="counter-up">3500</h3>
+                        <p>Properties Secured</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="fa fa-users"></i>
+                    <div class="facts-text">
+                        <h3 data-toggle="counter-up">80600</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="fa fa-check"></i>
+                    <div class="facts-text">
+                        <h3 data-toggle="counter-up">5000</h3>
+                        <p>Land Transactions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Facts End -->
+
+
+<!-- Price Start -->
+<!--<div class="price">-->
+<!--    <div class="container">-->
+<!--        <div class="section-header text-center">-->
+<!--            <p>Washing Plan</p>-->
+<!--            <h2>Choose Your Plan</h2>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-4">-->
+<!--                <div class="price-item">-->
+<!--                    <div class="price-header">-->
+<!--                        <h3>Basic Cleaning</h3>-->
+<!--                        <h2><span>$</span><strong>25</strong><span>.99</span></h2>-->
+<!--                    </div>-->
+<!--                    <div class="price-body">-->
+<!--                        <ul>-->
+<!--                            <li><i class="far fa-check-circle"></i>Seats Washing</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>-->
+<!--                            <li><i class="far fa-times-circle"></i>Interior Wet Cleaning</li>-->
+<!--                            <li><i class="far fa-times-circle"></i>Window Wiping</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="price-footer">-->
+<!--                        <a class="btn btn-custom" href="">Book Now</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <div class="price-item featured-item">-->
+<!--                    <div class="price-header">-->
+<!--                        <h3>Premium Cleaning</h3>-->
+<!--                        <h2><span>$</span><strong>35</strong><span>.99</span></h2>-->
+<!--                    </div>-->
+<!--                    <div class="price-body">-->
+<!--                        <ul>-->
+<!--                            <li><i class="far fa-check-circle"></i>Seats Washing</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>-->
+<!--                            <li><i class="far fa-times-circle"></i>Window Wiping</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="price-footer">-->
+<!--                        <a class="btn btn-custom" href="">Book Now</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <div class="price-item">-->
+<!--                    <div class="price-header">-->
+<!--                        <h3>Complex Cleaning</h3>-->
+<!--                        <h2><span>$</span><strong>49</strong><span>.99</span></h2>-->
+<!--                    </div>-->
+<!--                    <div class="price-body">-->
+<!--                        <ul>-->
+<!--                            <li><i class="far fa-check-circle"></i>Seats Washing</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>-->
+<!--                            <li><i class="far fa-check-circle"></i>Window Wiping</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="price-footer">-->
+<!--                        <a class="btn btn-custom" href="">Book Now</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- Price End -->
+
+
+<!-- Location Start -->
+<div id="location" class="location">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="section-header text-left">
+                    <p>Land Services </p>
+                    <h2>Get token for every request</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="location-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div class="location-text">
+                                <h3>Land Rregistration Office</h3>
+                                <p>123 Land Ave, Nairobi, Kenya</p>
+                                <p><strong>Call:</strong>+012 345 6789</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="location-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div class="location-text">
+                                <h3>Property Surveing Services</h3>
+                                <p>456 Estate Blvd, Nairobi, Kenya</p>
+                                <p><strong>Call:</strong>+012 345 6789</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="location-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div class="location-text">
+                                <h3>Title Deed Issuance</h3>
+                                <p>456 Westgate mall, Nairobi, Kenya</p>
+                                <p><strong>Call:</strong>+012 345 6789</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="location-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div class="location-text">
+                                <h3>Land Administration Center</h3>
+                                <p>321 Parcel Rd, Kisumu, Kenya</p>
+                                <p><strong>Call:</strong>+012 345 6789</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5">
+                <div class="location-form">
+                    <h3>Mapping Request</h3>
+                    <form action="/submit-survey-request" method="POST">
+
+                        <!-- Personal Information Section -->
+                        <div class="form-group mb-4">
+                            <label for="fullName">Full Name</label>
+                            <input class="form-control" id="fullName" name="fullName" placeholder="Enter your full name"
+                                   required type="text">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="email">Email Address</label>
+                            <input class="form-control" id="email" name="email" placeholder="Enter your email address"
+                                   required type="email">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="phone">Phone Number</label>
+                            <input class="form-control" id="phone" name="phone" placeholder="Enter your phone number"
+                                   required type="tel">
+                        </div>
+
+                        <!-- Property Information Section -->
+                        <div class="form-group mb-4">
+                            <label for="propertyLocation">Property Location</label>
+                            <input class="form-control" id="propertyLocation" name="propertyLocation"
+                                   placeholder="Enter the property location"
+                                   required type="text">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="propertySize">Property Size (in acres)</label>
+                            <input class="form-control" id="propertySize" name="propertySize"
+                                   placeholder="Enter the property size"
+                                   required type="number">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="surveyType">Type of Survey</label>
+                            <select class="form-control" id="surveyType" name="surveyType" required>
+                                <option disabled selected value="">Select the type of survey</option>
+                                <option value="boundary">Boundary Survey</option>
+                                <option value="topographic">Topographic Survey</option>
+                                <option value="subdivision">Subdivision Survey</option>
+                                <option value="construction">Construction Survey</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="additionalInfo">Additional Information</label>
+                            <textarea class="form-control" id="additionalInfo" name="additionalInfo"
+                                      placeholder="Provide any additional details about your request"
+                                      rows="4"></textarea>
+                        </div>
+
+                        <!-- Submission Section -->
+                        <button class="btn btn-primary btn-block" type="submit">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Location End -->
+
+
+<!-- Team Start -->
+<div class="team">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Meet Our Team</p>
+            <h2>Our Property Agents</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img alt="Team Image" src="{% static 'img/team-1.jpg' %}">
+                    </div>
+                    <div class="team-text">
+                        <h2>Donald John</h2>
+                        <p>Contractor</p>
+                        <div class="team-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img alt="Team Image" src="{% static 'img/team-2.jpg' %}">
+                    </div>
+                    <div class="team-text">
+                        <h2>Adam Phillips</h2>
+                        <p>Real Estate Ent</p>
+                        <div class="team-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img alt="Team Image" src="{% static 'img/team-3.jpg' %}">
+                    </div>
+                    <div class="team-text">
+                        <h2>Thomas Olsen</h2>
+                        <p>Contractor</p>
+                        <div class="team-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img alt="Team Image" src="{% static 'img/team-4.jpg' %}">
+                    </div>
+                    <div class="team-text">
+                        <h2>James Alien</h2>
+                        <p>CEO</p>
+                        <div class="team-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+
+<!-- Testimonial Start -->
+<div class="testimonial">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Testimonial</p>
+            <h2>What our clients say</h2>
+        </div>
+        <div class="owl-carousel testimonials-carousel">
+            <div class="testimonial-item">
+                <img alt="Image" src="{% static 'img/testimonial-1.jpg' %}">
+                <div class="testimonial-text">
+                    <h3>Johhn Paul</h3>
+                    <h4>Civil Eng.</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus
+                        tortor auctor gravid
+                    </p>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <img alt="Image" src="{% static 'img/testimonial-2.jpg' %}">
+                <div class="testimonial-text">
+                    <h3>Riziki Antonie</h3>
+                    <h4>Interior Designer</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus
+                        tortor auctor gravid
+                    </p>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <img alt="Image" src="{% static 'img/testimonial-3.jpg' %}">
+                <div class="testimonial-text">
+                    <h3>Chloe Kardasian</h3>
+                    <h4>Home Owner</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus
+                        tortor auctor gravid
+                    </p>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <img alt="Image" src="{% static 'img/testimonial-4.jpg' %}">
+                <div class="testimonial-text">
+                    <h3>Veronicah Nyamisi</h3>
+                    <h4>Real Estate Investor</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus
+                        tortor auctor gravid
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+
+<!-- Blog Start -->
+<div class="blog">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Our Listings</p>
+            <h2>Featured Listed Property</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img alt="Image" src="{% static 'img/prop1.jpg' %}"/>
+                        <div class="property-status">For Rent</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-type">
+                            <span class="network-tag">4 Network</span>
+                            <span class="condo-tag">Condos</span>
+                        </div>
+                        <div class="property-price">$6,700</div>
+                        <div class="property-address"><b>7012 Kajiado County, Kajiado, Kenya, East Afr.</b></div>
+                        <div class="property-info">
+                            <span><i class="fa fa-bed"></i> 4 Beds</span>
+                            <span><i class="fa fa-bath"></i> 2 Bath</span>
+                            <span><i class="fa fa-expand"></i> 820 sqft</span>
+                        </div>
+                        <div class="property-location">
+                            <i class="fa fa-map-marker-alt"></i> Kenya
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img alt="Image" src="{% static 'img/prop7.jpg' %}"/>
+                        <div class="property-status">For Rent</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-type">
+                            <span class="network-tag">4 Network</span>
+                            <span class="condo-tag">Condos</span>
+                        </div>
+                        <div class="property-price">$6,700</div>
+                        <div class="property-address"><b>7012 JoBurg Street, Johburgh, South Africa, LC345AC</b></div>
+                        <div class="property-info">
+                            <span><i class="fa fa-bed"></i> 4 Beds</span>
+                            <span><i class="fa fa-bath"></i> 2 Bath</span>
+                            <span><i class="fa fa-expand"></i> 820 sqft</span>
+                        </div>
+                        <div class="property-location">
+                            <i class="fa fa-map-marker-alt"></i> Johannesburgh, South Africa
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img alt="Image" src="{% static 'img/prop2.jpg' %}"/>
+                        <div class="property-status">For Rent</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-type">
+                            <span class="network-tag">4 Network</span>
+                            <span class="condo-tag">Condos</span>
+                        </div>
+                        <div class="property-price">$6,700</div>
+                        <div class="property-address"><b>5215 Abuja, Lagos, Abuja, LC345AC</b></div>
+                    </div>
+                    <div class="property-info">
+                        <span><i class="fa fa-bed"></i> 4 Beds</span>
+                        <span><i class="fa fa-bath"></i> 2 Bath</span>
+                        <span><i class="fa fa-expand"></i> 820 sqft</span>
+                    </div>
+                    <div class="property-location">
+                        <i class="fa fa-map-marker-alt"></i> Abuja, Nigeria
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Blog End -->
+
+
+<!-- Footer Start -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-contact">
+                    <h2>Get In Touch</h2>
+                    <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope"></i>info@example.com</p>
+                    <div class="footer-social">
+                        <a class="btn" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Popular Links</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Our Service</a>
+                    <a href="">Service Points</a>
+                    <a href="">Pricing Plan</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Useful Links</h2>
+                    <a href="">Terms of use</a>
+                    <a href="">Privacy policy</a>
+                    <a href="">Cookies</a>
+                    <a href="">Help</a>
+                    <a href="">FQAs</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-newsletter">
+                    <h2>Newsletter</h2>
+                    <form>
+                        <input class="form-control" placeholder="Full Name">
+                        <input class="form-control" placeholder="Email">
+                        <button class="btn btn-custom">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container copyright">
+        <p>&copy; <a href="#">ShambaSecure</a>, All Right Reserved. Designed By <a href="#">
+            EchoMinds Innovation</a></p>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to top button -->
+<a class="back-to-top" href="#"><i class="fa fa-chevron-up"></i></a>
+
+<!-- Pre Loader -->
+<div class="show" id="loader">
+    <div class="loader"></div>
+</div>
+
+<!-- JavaScript Libraries -->
+
+
+<script>
+
+// Get the modal
+var popup = document.getElementById("loginPopup");
+
+// Get the button that opens the modal (if any)
+var btn = document.getElementById("loginBtn"); // Adjust if you have a specific button
+
+// When the user clicks on the button, open the modal
+if (btn) {
+    btn.onclick = function() {
+        popup.style.display = "block";
+    }
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+
+
+document.getElementById('nfid-login').addEventListener('click', async () => {
+    const identity = await window.ic.identity.getIdentity({
+        provider: 'https://identity.ic0.app',
+        appId: '2613944',  // Replace with your app ID
+    });
+
+    if (identity) {
+        // Send the identity to your Django backend for verification
+        const response = await fetch('/verify_identity/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                principal: identity.getPrincipal().toText(),
+                delegation: identity.getDelegation().toJSON(),
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            window.location.href = '/dashboard/';  // Redirect to dashboard or appropriate page
+        } else {
+            alert('Login failed: ' + result.message);
+        }
+    }
+});
+
+</script>
+
+
+
+
+
+<script src="https://identity.ic0.app/ii.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+<script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+<script src="{% static 'mail/contact.js' %}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
